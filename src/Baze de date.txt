@@ -1,0 +1,77 @@
+CREATE TABLE servicii_medicale.Users (
+        user_id INT AUTO_INCREMENT PRIMARY KEY,
+        nume VARCHAR(100) NOT NULL,
+prenume VARCHAR(100) NOT NULL,
+data_nastere DATE NOT NULL,
+CNP CHAR(13) NOT NULL UNIQUE,
+adresa VARCHAR (255) not null,
+telefon VARCHAR(15) not null,
+email VARCHAR(100) not null,
+parola varchar(100) not null,
+role ENUM('USER', 'ADMIN') NOT NULL
+);
+
+CREATE table servicii_medicale.clinici (
+        id_clinica INT AUTO_INCREMENT PRIMARY KEY,
+        nume VARCHAR(100) NOT NULL,
+        adresa VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE servicii_medicale.medici (
+    medic_id INT AUTO_INCREMENT PRIMARY KEY,
+    nume VARCHAR(100) NOT NULL,
+    prenume VARCHAR(100) NOT NULL,
+    data_nastere DATE NOT NULL,
+    CNP_medic CHAR(13) NOT NULL UNIQUE,
+    adresa VARCHAR(255) NOT NULL,
+    telefon VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+     specializare ENUM(
+        'Cardiologie',
+        'Oncologie',
+        'Neurologie',
+        'Pediatrie',
+        'Dermatologie',
+        'Ginecologie',
+        'Urologie',
+       'Ortopedie',
+       'Oftalmologie',
+        'ORL',
+        'Reumatologie',
+        'Endocrinologie',
+        'Gastroenterologie',
+        'Hematologie',
+        'Nefrologie',
+        'Chirurgie generala',
+        'Medicina interna',
+       'Alergologie',
+        'Medicina de familie'
+    ) NOT NULL,
+    zi_saptamana SET('L', 'Ma', 'Mi', 'J', 'V', 'S', 'D'),
+    ora_start ENUM(
+        '05:00', '05:30', '06:00', '06:30', '07:00', '07:30',
+        '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+        '11:00', '11:30', '12:00'
+    ),
+    ora_end ENUM(
+        '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+        '17:00', '17:30', '18:00', '18:30', '19:00', '19:30',
+        '20:00', '20:30', '21:00', '21:30', '22:00', '22:30',
+        '23:00', '23:30', '23:59'
+    ),
+    parola VARCHAR(100) NOT NULL,
+    id_clinica INT NOT NULL,
+   FOREIGN KEY (id_clinica) REFERENCES Clinici(id_clinica) ON DELETE CASCADE
+);
+
+
+CREATE TABLE servicii_medicale.Programari (
+    programare_id INT AUTO_INCREMENT PRIMARY KEY,
+    cnp_user char(13) not null ,
+    cnp_medic char(13) NOT NULL ,
+    data_programare DATETIME NOT NULL,
+    descriere_afectiune VARCHAR(100) NOT NULL,
+    status ENUM('programata', 'anulata', 'finalizata') DEFAULT 'programata',
+    FOREIGN KEY (cnp_user) REFERENCES Users(cnp) ON DELETE CASCADE,
+    FOREIGN KEY (cnp_medic) REFERENCES Medici(cnp_medic) ON DELETE CASCADE
+);
