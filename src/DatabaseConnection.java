@@ -7,7 +7,7 @@ public class DatabaseConnection {
 
     private DatabaseConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/servicii_medicale", "root", "password");
+            connection = DriverManager.getConnection("#", "#", "#");
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         } catch (SQLException e) {
             System.out.println("Exceptie la conectare: " + e.getMessage());
@@ -38,3 +38,4 @@ public class DatabaseConnection {
         return instance;
     }
 }
+
