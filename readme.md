@@ -1,4 +1,4 @@
-Servicii-Medicale-Java is a Java application that implements core functionality for managing medical services. This project is designed to help learners and developers understand the basics of building a modular Java system for healthcare-related operations.
+Medical-Services-Java is a Java application that implements core functionality for managing medical services. This project is designed to help learners and developers understand the basics of building a modular Java system for healthcare-related operations.
 
 🧠 Overview
 
